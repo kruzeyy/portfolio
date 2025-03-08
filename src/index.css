@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 🌟 Effet de fondu en apparition */
+.fade-in {
+  animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🌊 Effet de défilement fluide */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 🏆 Ajout de polices Apple-like */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  background-color: #000;
+  color: white;
+}
+
+/* 🔥 Effet de survol moderne pour les liens */
+a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+a:hover::after {
+  transform: scaleX(1);
+}
