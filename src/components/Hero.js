@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [showMore, setShowMore] = useState(false);
+  const [showSnake, setShowSnake] = useState(false);
 
   useEffect(() => {
     const updateCursor = (e) => {
@@ -46,33 +46,26 @@ const Hero = () => {
         Bienvenue sur <span className="text-gray-500">mon portfolio</span>
       </motion.h1>
       <p className="text-xl text-gray-400 mt-4 max-w-2xl font-light">
-        Découvrez mes projets et ma vision du design moderne.
+        Découvrez mes projets et ma vision du design <span className="relative cursor-pointer text-gray-200" onClick={() => setShowSnake(true)}>moderne.</span>
       </p>
-      <motion.a
-        onClick={() => setShowMore(!showMore)}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.8, ease: "easeOut", delay: 0.5 }}
-        className="mt-6 px-10 py-3 bg-white/10 text-white rounded-full text-lg font-medium border border-white/50 hover:bg-white/30 transition backdrop-blur-md cursor-pointer"
-      >
-        En savoir plus
-      </motion.a>
 
-      {showMore && (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="mt-8 text-gray-300 max-w-3xl text-lg font-light bg-white/10 p-6 rounded-lg shadow-lg backdrop-blur-md"
-        >
-          <p>
-            Ce portfolio met en avant mon expertise en développement web et mon approche du design.
-            Animations fluides, interactivité soignée et expériences immersives sont au cœur de mon travail.
-          </p>
-          <p className="mt-4">
-            Explorez mes projets et découvrez comment j’allie innovation et esthétique pour créer des interfaces modernes et impactantes.
-          </p>
-        </motion.div>
+      {showSnake && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50">
+          <div className="relative w-[800px] h-[600px] flex flex-col items-center">
+            <iframe 
+              src="https://playpager.com/easy-chess/" 
+              className="w-full h-full border-4 border-white rounded-lg shadow-lg"
+              title="Easy Chess"
+              allowFullScreen
+            />
+            <button 
+              onClick={() => setShowSnake(false)} 
+              className="absolute top-3 right-3 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
       )}
     </motion.section>
   );
