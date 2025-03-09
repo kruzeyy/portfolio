@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const updateCursor = (e) => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Positionne le curseur au centre au chargement
     setCursorPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
 
     window.addEventListener("mousemove", updateCursor);
@@ -29,7 +29,6 @@ const Hero = () => {
       className="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-gray-900 to-black shadow-xl backdrop-blur-lg relative"
       style={{ backgroundPosition: "center", backgroundSize: "cover", backgroundAttachment: "fixed" }}
     >
-      {/* Curseur personnalisé */}
       <motion.div
         className="fixed w-4 h-4 bg-white rounded-full pointer-events-none"
         style={{ top: 0, left: 0, position: "fixed", transform: "translate(-50%, -50%)" }}
@@ -50,14 +49,31 @@ const Hero = () => {
         Découvrez mes projets et ma vision du design moderne.
       </p>
       <motion.a
-        href="#projects"
+        onClick={() => setShowMore(!showMore)}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.8, ease: "easeOut", delay: 0.5 }}
-        className="mt-6 px-10 py-3 bg-white/10 text-white rounded-full text-lg font-medium border border-white/50 hover:bg-white/30 transition backdrop-blur-md"
+        className="mt-6 px-10 py-3 bg-white/10 text-white rounded-full text-lg font-medium border border-white/50 hover:bg-white/30 transition backdrop-blur-md cursor-pointer"
       >
         En savoir plus
       </motion.a>
+
+      {showMore && (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="mt-8 text-gray-300 max-w-3xl text-lg font-light bg-white/10 p-6 rounded-lg shadow-lg backdrop-blur-md"
+        >
+          <p>
+            Ce portfolio met en avant mon expertise en développement web et mon approche du design.
+            Animations fluides, interactivité soignée et expériences immersives sont au cœur de mon travail.
+          </p>
+          <p className="mt-4">
+            Explorez mes projets et découvrez comment j’allie innovation et esthétique pour créer des interfaces modernes et impactantes.
+          </p>
+        </motion.div>
+      )}
     </motion.section>
   );
 };
