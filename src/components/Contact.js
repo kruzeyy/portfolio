@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updateCursor = (e) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    setCursorPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
+    window.addEventListener("mousemove", updateCursor);
+    document.body.style.cursor = "none";
+
+    return () => {
+      window.removeEventListener("mousemove", updateCursor);
+      document.body.style.cursor = "default";
+    };
+  }, []);
+
   return (
-    <section id="contact" className="h-screen flex items-center justify-center bg-black text-white">
+    <motion.section 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
+      className="h-screen flex items-center justify-center bg-black text-white relative"
+    >
+      <motion.div
+        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none z-50"
+        style={{ top: 0, left: 0, position: "fixed", transform: "translate(-50%, -50%)" }}
+        animate={{ x: cursorPosition.x, y: cursorPosition.y }}
+        transition={{ duration: 0, ease: "linear" }}
+      />
+
       <div className="text-center">
         <h2 className="text-5xl font-bold">Me Contacter</h2>
         <p className="text-gray-400 mt-4">Envoyez-moi un message pour collaborer !</p>
@@ -10,7 +41,7 @@ const Contact = () => {
           Envoyer un Email
         </a>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
