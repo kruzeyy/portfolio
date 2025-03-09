@@ -9,6 +9,7 @@ const Navbar = () => {
           <Link to="/" className="text-gray-800 hover:text-gray-600 transition-all duration-300">Accueil</Link>
           <Link to="/Projects" className="text-gray-800 hover:text-gray-600 transition-all duration-300">Projets</Link>
           <Link to="/contact" className="text-gray-800 hover:text-gray-600 transition-all duration-300">Contact</Link>
+          <a href="/Bleu et Blanc Moderne Photo Ingénierie CV.pdf" target="_blank" rel="noopener noreferrer" className="text-gray-800 hover:text-gray-600 transition-all duration-300">CV</a>
         </div>
       </div>
     </nav>
