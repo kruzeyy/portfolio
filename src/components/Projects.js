@@ -1,18 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const projects = [
-  { 
-    title: "MatchFlix", 
-    desc: "Plateforme pour trouver les séries parfaites.", 
-    image: "/images/matchflix.jpg",
-    link: "#" 
-  },
-  { 
-    title: "Weather App", 
-    desc: "Application météo interactive.", 
-    image: "/images/weather-app.jpg",
-    link: "#" 
-  },
   { 
     title: "PokéBooster", 
     desc: "Simulateur d'ouverture de boosters Pokémon.", 
@@ -22,17 +11,58 @@ const projects = [
 ];
 
 const Projects = () => {
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updateCursor = (e) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    setCursorPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
+    window.addEventListener("mousemove", updateCursor);
+    document.body.style.cursor = "none";
+
+    return () => {
+      window.removeEventListener("mousemove", updateCursor);
+      document.body.style.cursor = "default";
+    };
+  }, []);
+
   return (
-    <section className="py-20 bg-black text-white relative">
+    <motion.section 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="py-20 bg-black text-white relative"
+    >
+      <motion.div
+        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none"
+        style={{ top: 0, left: 0, position: "fixed", transform: "translate(-50%, -50%)" }}
+        animate={{ x: cursorPosition.x, y: cursorPosition.y }}
+        transition={{ duration: 0, ease: "linear" }}
+      />
+      
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-6xl font-extrabold tracking-tight">Mes Projets</h2>
         <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
           Découvrez quelques-unes de mes réalisations et mon approche du design interactif.
         </p>
-        
+        <p className="text-gray-400 mt-2">
+          Pour voir plus de projets, consultez mon GitHub : 
+          <a href="https://github.com/kruzeyy" className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
+            github.com/kruzeyy
+          </a>.
+        </p>
         <div className="grid md:grid-cols-3 gap-12 mt-10">
           {projects.map((project, index) => (
-            <div key={index} className="max-w-sm h-[500px] flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <motion.div 
+              key={index}
+              className="max-w-sm h-[500px] flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.2 }}
+            >
               <a href={project.link}>
                 <img className="rounded-t-lg w-full h-60 object-contain" src={project.image} alt={project.title} />
               </a>
@@ -48,11 +78,11 @@ const Projects = () => {
                   </svg>
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

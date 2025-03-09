@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 const Hero = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [showSnake, setShowSnake] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
 
   useEffect(() => {
     const updateCursor = (e) => {
@@ -48,6 +49,25 @@ const Hero = () => {
       <p className="text-xl text-gray-400 mt-4 max-w-2xl font-light">
         Découvrez mes projets et ma vision du design <span className="relative cursor-pointer text-gray-200" onClick={() => setShowSnake(true)}>moderne.</span>
       </p>
+      
+      <button 
+        onClick={() => setShowDescription(!showDescription)}
+        className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition"
+      >
+        {showDescription ? "Masquer" : "En savoir plus"}
+      </button>
+
+      {showDescription && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mt-4 max-w-2xl text-gray-300 text-lg bg-gray-800 bg-opacity-50 p-4 rounded-lg"
+        >
+          <p>Je suis Maxime Pontus, actuellement en Bachelor 3 en informatique, option développement, à Lyon Ynov Campus. 
+          Actuellement, je travaille en alternance en tant que Data Analyst chez AD'HOC RESEARCH, où je développe mes compétences en analyse de données et en développement web.</p>
+        </motion.div>
+      )}
 
       {showSnake && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50">
