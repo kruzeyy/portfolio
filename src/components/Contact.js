@@ -28,10 +28,10 @@ const Contact = () => {
       className="h-screen flex items-center justify-center bg-black text-white relative"
     >
       <motion.div
-        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none z-50"
+        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none shadow-[0_0_15px_rgba(255,255,255,0.6)]"
         style={{ top: 0, left: 0, position: "fixed", transform: "translate(-50%, -50%)" }}
         animate={{ x: cursorPosition.x, y: cursorPosition.y }}
-        transition={{ duration: 0, ease: "linear" }}
+        transition={{ duration: 0.1, ease: "easeOut" }}
       />
 
       <div className="text-center">

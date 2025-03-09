@@ -37,10 +37,10 @@ const Projects = () => {
       className="py-20 bg-black text-white relative"
     >
       <motion.div
-        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none"
+        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none shadow-[0_0_15px_rgba(255,255,255,0.6)]"
         style={{ top: 0, left: 0, position: "fixed", transform: "translate(-50%, -50%)" }}
         animate={{ x: cursorPosition.x, y: cursorPosition.y }}
-        transition={{ duration: 0, ease: "linear" }}
+        transition={{ duration: 0.1, ease: "easeOut" }}
       />
       
       <div className="max-w-6xl mx-auto px-6 text-center">

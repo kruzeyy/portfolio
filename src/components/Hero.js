@@ -11,13 +11,16 @@ const Hero = () => {
       setCursorPosition({ x: e.clientX, y: e.clientY });
     };
 
+
     setCursorPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
 
     window.addEventListener("mousemove", updateCursor);
+    
     document.body.style.cursor = "none";
 
     return () => {
       window.removeEventListener("mousemove", updateCursor);
+      
       document.body.style.cursor = "default";
     };
   }, []);
@@ -30,13 +33,14 @@ const Hero = () => {
       className="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-gray-900 to-black shadow-xl backdrop-blur-lg relative"
       style={{ backgroundPosition: "center", backgroundSize: "cover", backgroundAttachment: "fixed" }}
     >
+      
       <motion.div
-        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none"
+        className="fixed w-4 h-4 bg-white rounded-full pointer-events-none shadow-[0_0_15px_rgba(255,255,255,0.6)]"
         style={{ top: 0, left: 0, position: "fixed", transform: "translate(-50%, -50%)" }}
         animate={{ x: cursorPosition.x, y: cursorPosition.y }}
-        transition={{ duration: 0, ease: "linear" }}
+        transition={{ duration: 0.1, ease: "easeOut" }}
       />
-      
+
       <motion.h1 
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
