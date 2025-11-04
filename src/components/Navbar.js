@@ -2,6 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
+  
+  // Chemin vers le CV PDF - fonctionne en développement et en production sur Vercel
+  const cvPath = `${process.env.PUBLIC_URL || ""}/Bleu et Blanc Moderne Photo Ingénierie CV.pdf`;
 
   const isActive = (path) => {
     if (path === "/" && location.pathname === "/") return true;
@@ -39,10 +42,11 @@ const Navbar = () => {
             </Link>
           ))}
           <a
-            href="/Bleu et Blanc Moderne Photo Ingénierie CV.pdf"
+            href={cvPath}
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-800 hover:text-gray-600 transition-all duration-300"
+            download="CV_Maxime_Pontus.pdf"
           >
             CV
           </a>
